@@ -1,0 +1,19 @@
+[Unit]
+Description=Ingest turnlog JSONL into turnlog.db (fresh session review data)
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/dev/sparky-flightdeck
+# Ingest ONLY -- no --expire, no --probe. Those belong to the nightly rollup:
+# --probe writes a probes row per run (every 5 min would flood the table and make
+# the doctor's own history unreadable) and --expire is a retention pass that has
+# no reason to run more than daily.
+#
+# Why this exists: rollup ran once a night, so turnlog.db -- the thing every query,
+# the dashboard, and the doctor read -- lagged reality by up to 24h. Capture was
+# never the problem; freshness was. Measured cost of an ingest-only pass: ~234ms.
+ExecStart=/usr/bin/env bash -lc 'python3 -m flightdeck rollup'
+TimeoutStartSec=5min
+Slice=sparky-services.slice
+MemoryHigh=192M
+MemoryMax=256M

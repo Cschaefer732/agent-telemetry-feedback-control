@@ -1,0 +1,77 @@
+# flightdeck governor — default weights, hand-edited by the nightly reviewer.
+#
+# Every numeric value below has a min/max documented on its own line. governor.clamp_config()
+# enforces those bounds on load: an out-of-range edit is corrected and reported, never silently
+# kept and never allowed to crash a turn's model-tier/skill/compaction/mode decision.
+#
+# Every domain ships in shadow mode ([governor.shadow] all true): the governor computes and
+# records a choice but nothing acts on it until the nightly reviewer flips a domain live.
+
+[governor]
+enabled = true                # bool, no min/max — master kill switch for the governor itself
+epsilon = 0.10                # min=0.0 max=1.0 — epsilon-greedy exploration rate
+beta = 1.0                    # min=0.0 max=5.0 — weight on the empirical success term
+gamma = 0.5                   # min=0.0 max=5.0 — weight on the arm cost penalty
+min_samples = 20              # min=1 max=500 — samples/arm/bucket before trusting the empirical mean over the prior
+optimistic_prior = 0.75       # min=0.0 max=1.0 — assumed success for an under-sampled arm
+decay_half_life_days = 30.0   # min=0.1 max=365.0 — recency half-life for the success table
+
+[governor.shadow]
+model_tier = true             # bool — record-only until the nightly reviewer graduates this domain
+skills = true                 # bool
+compaction = true             # bool
+mode_delegation = true        # bool
+
+[kpi.weights]
+completion = 0.20             # min=0.0 max=1.0
+tool_reliability = 0.20       # min=0.0 max=1.0
+efficiency = 0.15             # min=0.0 max=1.0
+focus = 0.15                  # min=0.0 max=1.0
+context_health = 0.15         # min=0.0 max=1.0
+autonomy = 0.15               # min=0.0 max=1.0
+
+[arms.model_tier]
+fast     = { cost = 0.05 }    # cost min=0.0 max=5.0 — cheapest tier
+balanced = { cost = 5.00 }    # cost min=0.0 max=5.0 — arm retired on this fleet, name fails at request time; max cost keeps shadow off it until a human renames it
+deep     = { cost = 1.00 }    # cost min=0.0 max=5.0
+frontier = { cost = 3.00 }    # cost min=0.0 max=5.0 — dearest tier
+
+[weights.model_tier]
+# Per-feature weight applied to the normalized feature vector (Features.as_vector()) for each
+# model_tier arm. Unlisted features default to weight 0.0 in the dot product. min=-2.0 max=2.0
+# for every value on every line below.
+fast     = { prompt_tokens = -0.3, file_refs = -0.1, prev_turn_failed = -0.2, context_occupancy = -0.2 }  # min=-2.0 max=2.0 each
+balanced = { prompt_tokens = 0.0,  file_refs = 0.0,  prev_turn_failed = 0.0,  context_occupancy = 0.0 }   # min=-2.0 max=2.0 each
+deep     = { prompt_tokens = 0.3,  file_refs = 0.2,  prev_turn_failed = 0.3,  context_occupancy = 0.2, verb_debug = 0.2 }   # min=-2.0 max=2.0 each
+frontier = { prompt_tokens = 0.5,  file_refs = 0.3,  prev_turn_failed = 0.4,  context_occupancy = 0.3, verb_review = 0.3 }  # min=-2.0 max=2.0 each
+
+[arms.skills]
+# Policy arms for skill injection aggressiveness, not one arm per skill (there are ~180 skills —
+# no arm would ever clear min_samples). A specific turn's actual candidate-skill choice still goes
+# through Governor.choose("skills", features, arms=<matched skills>) with its own arms list; this
+# table is only the fallback used when no per-turn arms are supplied (e.g. record_shadow_decisions'
+# batch replay), same role [arms.model_tier] plays for model_tier. cost min=0.0 max=5.0 each,
+# ordered by how many tokens injecting that policy costs the prompt.
+suppress           = { cost = 0.00 }  # cost min=0.0 max=5.0 — cheapest: inject no skill this turn
+match_only         = { cost = 0.10 }  # cost min=0.0 max=5.0 — default: description-matched skills only
+match_plus_related = { cost = 0.30 }  # cost min=0.0 max=5.0 — matched skills + similarity-related ones
+always_on          = { cost = 0.60 }  # cost min=0.0 max=5.0 — dearest: always inject the full set
+
+[arms.compaction]
+# offset: percent adjustment to the compaction threshold, min=-25.0 max=25.0. recall is a bool
+# toggle for digest/fact recall on compaction, no min/max.
+shrink_recall_off  = { offset = -25.0, recall = false }  # offset min=-25.0 max=25.0
+shrink_recall_on   = { offset = -25.0, recall = true }   # offset min=-25.0 max=25.0
+default_recall_off = { offset = 0.0,   recall = false }  # offset min=-25.0 max=25.0
+default_recall_on  = { offset = 0.0,   recall = true }   # offset min=-25.0 max=25.0
+grow_recall_off    = { offset = 25.0,  recall = false }  # offset min=-25.0 max=25.0
+grow_recall_on     = { offset = 25.0,  recall = true }   # offset min=-25.0 max=25.0
+
+[arms.mode_delegation]
+plan_first = true             # bool, no min/max — named arm: force plan-first mode
+critic = true                 # bool — named arm: force the critic pass on
+delegate = true                # bool — named arm: force subagent delegation on
+
+[thresholds]
+tool_error_rate = 0.25        # min=0.0 max=1.0 — flag rule: tool failure rate above this flags a turn
+low_kpi = 0.50                # min=0.0 max=1.0 — flag rule: kpi_score below this flags a turn

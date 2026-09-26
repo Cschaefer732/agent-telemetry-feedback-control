@@ -1,0 +1,14 @@
+[Unit]
+Description=Nightly Claude review of the day's turns
+Requires=sparky-review-rollup.service
+After=sparky-review-rollup.service network-online.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=%h/dev/sparky-flightdeck
+# Real Claude Code, not claude-spark: a 30B cannot reason over a night of traces and rewrite
+# skills. See integration/systemd/README.md, milestone M0.
+ExecStart=/usr/bin/env bash -lc 'python3 -m flightdeck sample --write-brief && claude -p "$(cat "$SPARKY_REVIEW_BRIEF")" --permission-mode acceptEdits'
+Environment=SPARKY_REVIEW_BRIEF=%h/.local/state/sparky/turnlog/review-brief.md
+# Long enough for a real review, short enough that a hung auth prompt does not sit until morning.
+TimeoutStartSec=60min

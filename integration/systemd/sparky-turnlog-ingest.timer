@@ -1,0 +1,12 @@
+[Unit]
+Description=Ingest turnlogs every 5 minutes so session review is not a day stale
+
+[Timer]
+OnBootSec=3min
+OnUnitActiveSec=5min
+# Do not fire a catch-up burst after the box has been off; the nightly rollup
+# covers any gap and this timer only needs to keep the recent window fresh.
+Persistent=false
+
+[Install]
+WantedBy=timers.target

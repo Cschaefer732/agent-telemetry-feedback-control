@@ -1,0 +1,11 @@
+[Unit]
+Description=Snapshot this host's CPU/RAM/GPU/disk into host_metrics
+
+[Timer]
+OnCalendar=*:0/5
+# Backfill a missed window instead of skipping it silently.
+Persistent=true
+AccuracySec=30sec
+
+[Install]
+WantedBy=timers.target

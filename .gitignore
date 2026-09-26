@@ -1,0 +1,43 @@
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Build / runtime
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.eggs/
+node_modules/
+.next/
+target/
+.venv/
+.pytest_cache/
+.ruff_cache/
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Claude local overrides
+CLAUDE.local.md
+
+# Obsidian local config (vault markdown is tracked, UI config is not)
+wiki/.obsidian/
+
+# Telemetry data must never be committed
+*.db
+*.db-wal
+*.db-shm
+*.jsonl

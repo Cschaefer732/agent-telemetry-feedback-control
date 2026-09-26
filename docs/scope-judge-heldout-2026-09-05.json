@@ -1,0 +1,38 @@
+{
+ "regex (baseline)": {
+  "precision": 0.889,
+  "recall": 0.218,
+  "f1": 0.35,
+  "kappa": 0.296
+ },
+ "tfidf+logreg": {
+  "precision": 0.649,
+  "recall": 0.747,
+  "f1": 0.694,
+  "kappa": 0.612
+ },
+ "regex OR logreg": {
+  "precision": 0.675,
+  "recall": 0.87,
+  "f1": 0.76,
+  "kappa": 0.692
+ },
+ "judge v1 (untuned)": {
+  "precision": 0.728,
+  "recall": 0.698,
+  "f1": 0.713,
+  "kappa": 0.644
+ },
+ "judge v3 (tuned)": {
+  "precision": 0.736,
+  "recall": 0.726,
+  "f1": 0.731,
+  "kappa": 0.665
+ },
+ "judge v3 OR regex": {
+  "precision": 0.72,
+  "recall": 0.739,
+  "f1": 0.729,
+  "kappa": 0.662
+ }
+}

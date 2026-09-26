@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Runs `flightdeck scope ingest` + `flightdeck kpi` every 30 minutes so the scope pipeline's
+  own health has a scheduled heartbeat instead of relying on a human remembering the CLI.
+
+  Interval: 30 minutes. Every existing probe window in this project (`window_hours`, doctor's
+  hook-liveness check, etc.) is 24h, so the pipeline doesn't need to run more often than that
+  to keep those checks fed -- 30 minutes is instead sized to how fast a broken hook should be
+  *visible* to a human glancing at the status file/log, and to keep each run cheap (ingest is
+  an incremental jsonl tail-read, kpi is a bounded sqlite aggregate query) rather than to any
+  requirement of the KPI math itself.
+
+  Sleep: StartInterval is wall-clock, not wake-triggered -- a run due while the Mac was asleep
+  simply does not happen, and macOS does not queue it. RunAtLoad picks that back up: every
+  wake-from-sleep re-triggers loginwindow's re-attach of user agents, which re-evaluates
+  RunAtLoad, so a run happens promptly after wake even if the interval was missed while asleep.
+  This is a real gap, not a proof of continuous coverage -- see the scope_liveness probe's own
+  documented limitation, which is exactly about not being able to tell "hook broken" from
+  "machine was asleep/idle" apart from turn activity.
+
+  Overlap: handled inside run-scope-pipeline.sh with a `mkdir`-based lock (macOS has no
+  flock(1)), not here -- launchd's own overlap semantics for StartInterval jobs are not
+  reliable enough to depend on alone.
+
+  Visibility: stdout/stderr go to StandardOutPath/StandardErrorPath below, AND the script
+  writes scope-pipeline-status.json with the last run's timestamp + exit code beside the
+  turnlog store -- a stale status file with old scope_liveness data are it never running is
+  itself a nameable finding, not a silent failure.
+-->
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.sparky.flightdeck.scope-pipeline</string>
+
+    <key>ProgramArguments</key>
+    <array>
+        <string>/bin/bash</string>
+        <!-- Replace this with the real absolute path to this repo checkout at install time. -->
+        <string>/Users/YOUR_USERNAME/dev/sparky-flightdeck/integration/launchd/run-scope-pipeline.sh</string>
+    </array>
+
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/opt/miniconda3/bin:/usr/local/bin:/usr/bin:/bin</string>
+        <!-- Set only if the target box's python3 that has flightdeck importable is not the
+             first `python3` on PATH above. -->
+        <key>FLIGHTDECK_PYTHON</key>
+        <string>/opt/miniconda3/bin/python3</string>
+    </dict>
+
+    <key>StartInterval</key>
+    <integer>1800</integer>
+
+    <key>RunAtLoad</key>
+    <true/>
+
+    <key>StandardOutPath</key>
+    <string>/Users/YOUR_USERNAME/Library/Logs/sparky-flightdeck/scope-pipeline.log</string>
+
+    <key>StandardErrorPath</key>
+    <string>/Users/YOUR_USERNAME/Library/Logs/sparky-flightdeck/scope-pipeline.err.log</string>
+
+    <key>ProcessType</key>
+    <string>Background</string>
+</dict>
+</plist>

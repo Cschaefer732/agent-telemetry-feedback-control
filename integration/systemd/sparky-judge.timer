@@ -1,0 +1,11 @@
+[Unit]
+Description=run the flightdeck judge nightly at 02:45
+
+[Timer]
+# after the 01:50 rollup flags turns and the 02:00 review samples them; before nothing —
+# the judge writes advisory judgments rows only, nothing downstream is timing-coupled
+OnCalendar=*-*-* 02:45:00
+Persistent=true
+
+[Install]
+WantedBy=timers.target

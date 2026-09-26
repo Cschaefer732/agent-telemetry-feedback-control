@@ -1,0 +1,11 @@
+[Unit]
+Description=Regression check and auto-revert
+
+[Timer]
+OnCalendar=*-*-* 03:10:00
+# Backfill a missed window instead of skipping the night silently.
+Persistent=true
+AccuracySec=1min
+
+[Install]
+WantedBy=timers.target

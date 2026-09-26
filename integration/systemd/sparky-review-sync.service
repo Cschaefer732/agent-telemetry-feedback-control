@@ -1,0 +1,11 @@
+[Unit]
+Description=Pull fleet turnlogs into the canonical store
+After=network-online.target
+
+[Service]
+Type=oneshot
+Environment=FLIGHTDECK_DIR=%h/dev/sparky-flightdeck
+ExecStart=%h/.local/bin/sync-turnlogs.sh
+# A partial sync is a finding for the reviewer, not a reason to break the chain.
+SuccessExitStatus=0
+TimeoutStartSec=15min

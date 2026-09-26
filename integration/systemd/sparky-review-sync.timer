@@ -1,0 +1,11 @@
+[Unit]
+Description=Pull fleet turnlogs into the canonical store
+
+[Timer]
+OnCalendar=*-*-* 01:40:00
+# Backfill a missed window instead of skipping the night silently.
+Persistent=true
+AccuracySec=1min
+
+[Install]
+WantedBy=timers.target

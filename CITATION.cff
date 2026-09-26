@@ -1,0 +1,20 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "Closed-Loop Telemetry and Judge-Guarded Self-Tuning for LLM Coding Agents"
+abstract: >-
+  A working system for turn-level telemetry across multiple LLM coding-agent runtimes,
+  deterministic KPI scoring, a shadow-mode governor that learns per-turn model-tier / skill /
+  compaction / delegation policy, and a nightly LLM-judged review that tunes the system's
+  configuration from evidence. Includes a documented evaluator-contamination case study and fix.
+authors:
+  - family-names: Schaefer
+    given-names: Carter
+version: 0.1.0
+date-released: "2026-09-26"
+license: MIT
+keywords:
+  - llm-agents
+  - observability
+  - self-tuning
+  - reinforcement-learning
+  - evaluation
