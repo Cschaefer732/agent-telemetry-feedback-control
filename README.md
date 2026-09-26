@@ -149,8 +149,8 @@ that should have looked identical to any judge. Removing `kpi_score` from the ju
 not make two judge models agree with each other; it removes the specific loop that made their
 *disagreement* unmeasurable in the first place.
 
-**The fix** (see `fix(judge,governor): stop leaking kpi_score to the judge, record propensity` in
-the project history): the turn's `kpi_score` was removed from the judge's prompt entirely. A
+**The fix** (made in the private predecessor repo before this public release, whose history
+starts fresh; the code here already includes it): the turn's `kpi_score` was removed from the judge's prompt entirely. A
 second, related defect was fixed in the same change — the governor's `_choose` step already knew
 whether a pick was the argmax choice or an epsilon-greedy exploration, and `record()` was
 discarding both. Without that flag, the action-selection propensity `P(a|x)` is unrecoverable, and
