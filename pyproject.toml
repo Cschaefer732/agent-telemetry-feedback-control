@@ -9,7 +9,7 @@ authors = [{ name = "Carter Schaefer" }]
 dependencies = []
 
 [project.optional-dependencies]
-dev = ["pytest>=8", "ruff>=0.6"]
+dev = ["pytest>=8", "ruff>=0.6", "scikit-learn>=1.4"]
 
 [project.scripts]
 flightdeck = "flightdeck.__main__:main"
