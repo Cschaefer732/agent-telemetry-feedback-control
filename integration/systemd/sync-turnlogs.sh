@@ -10,7 +10,7 @@
 
 set -uo pipefail
 
-FLIGHTDECK_DIR="${FLIGHTDECK_DIR:-$HOME/dev/sparky-flightdeck}"
+FLIGHTDECK_DIR="${FLIGHTDECK_DIR:-$HOME/dev/closed-loop-agent-tuning}"
 STATE_DIR="${SPARKY_TURNLOG_DIR:-$HOME/.local/state/sparky/turnlog}"
 INBOX="$STATE_DIR/inbox"
 LOG="$STATE_DIR/sync.log"

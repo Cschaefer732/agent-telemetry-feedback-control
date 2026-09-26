@@ -171,7 +171,7 @@ def test_url_userinfo_near_miss_no_credentials() -> None:
 
 
 def test_ips_and_paths_not_redacted() -> None:
-    text = "connecting to 198.51.100.20 at /Users/carter/dev/sparky-flightdeck/flightdeck/redact.py"
+    text = "connecting to 198.51.100.20 at /Users/carter/dev/closed-loop-agent-tuning/flightdeck/redact.py"
     scrubbed, counts = redact(text)
     assert scrubbed == text
     assert counts == {}

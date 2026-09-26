@@ -3,6 +3,6 @@ Description=Snapshot this host's CPU/RAM/GPU/disk into host_metrics
 
 [Service]
 Type=oneshot
-WorkingDirectory=%h/dev/sparky-flightdeck
+WorkingDirectory=%h/dev/closed-loop-agent-tuning
 ExecStart=/usr/bin/env python3 -m flightdeck collect
 TimeoutStartSec=2min

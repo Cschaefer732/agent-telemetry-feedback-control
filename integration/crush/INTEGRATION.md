@@ -19,7 +19,7 @@ cd <your-config-repo>/crush-fork
 without touching `go.mod`:
 
 ```sh
-cp -R ~/dev/sparky-flightdeck/go/turnlog <clone>/internal/turnlog
+cp -R ~/dev/closed-loop-agent-tuning/go/turnlog <clone>/internal/turnlog
 ```
 
 Then delete `internal/turnlog/turnlog_test.go`'s module path assumptions if any appear — the

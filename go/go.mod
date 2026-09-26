@@ -1,3 +1,3 @@
-module github.com/Cschaefer732/sparky-flightdeck/go
+module github.com/Cschaefer732/closed-loop-agent-tuning/go
 
 go 1.22

@@ -33,9 +33,9 @@ empty forever — install it on every box, not just the review host.
 
 ```sh
 mkdir -p ~/.config/systemd/user
-cp ~/dev/sparky-flightdeck/integration/systemd/*.service ~/.config/systemd/user/
-cp ~/dev/sparky-flightdeck/integration/systemd/*.timer   ~/.config/systemd/user/
-install -m 0755 ~/dev/sparky-flightdeck/integration/systemd/sync-turnlogs.sh ~/.local/bin/
+cp ~/dev/closed-loop-agent-tuning/integration/systemd/*.service ~/.config/systemd/user/
+cp ~/dev/closed-loop-agent-tuning/integration/systemd/*.timer   ~/.config/systemd/user/
+install -m 0755 ~/dev/closed-loop-agent-tuning/integration/systemd/sync-turnlogs.sh ~/.local/bin/
 
 systemctl --user daemon-reload
 systemctl --user enable --now sparky-review-sync.timer sparky-review-rollup.timer \
@@ -48,14 +48,14 @@ loginctl enable-linger "$USER"
 
 ## Install (every box: host metrics)
 
-Run this on every box where `~/dev/sparky-flightdeck` is checked out and you want that box's
+Run this on every box where `~/dev/closed-loop-agent-tuning` is checked out and you want that box's
 resource usage showing up in `fleet-status.md` — the review host and every other agent-running
 box in your fleet.
 
 ```sh
 mkdir -p ~/.config/systemd/user
-cp ~/dev/sparky-flightdeck/integration/systemd/sparky-collect-host-metrics.service ~/.config/systemd/user/
-cp ~/dev/sparky-flightdeck/integration/systemd/sparky-collect-host-metrics.timer   ~/.config/systemd/user/
+cp ~/dev/closed-loop-agent-tuning/integration/systemd/sparky-collect-host-metrics.service ~/.config/systemd/user/
+cp ~/dev/closed-loop-agent-tuning/integration/systemd/sparky-collect-host-metrics.timer   ~/.config/systemd/user/
 
 systemctl --user daemon-reload
 systemctl --user enable --now sparky-collect-host-metrics.timer

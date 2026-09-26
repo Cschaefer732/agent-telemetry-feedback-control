@@ -22,7 +22,7 @@ while every timer still reports green. Prove it works before building on it.
 ## Step 1 — install
 
 ```sh
-cd ~/dev/sparky-flightdeck
+cd ~/dev/closed-loop-agent-tuning
 pip install -e '.[dev]'
 python3 -m flightdeck init
 ```

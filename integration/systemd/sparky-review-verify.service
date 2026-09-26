@@ -3,6 +3,6 @@ Description=Regression check and auto-revert of last week's tuning changes
 
 [Service]
 Type=oneshot
-WorkingDirectory=%h/dev/sparky-flightdeck
+WorkingDirectory=%h/dev/closed-loop-agent-tuning
 ExecStart=/usr/bin/env python3 -m flightdeck verify --auto-revert
 TimeoutStartSec=15min
