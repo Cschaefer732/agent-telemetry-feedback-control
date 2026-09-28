@@ -54,11 +54,11 @@ def test_render_includes_registry_when_present(tmp_path: Path) -> None:
     host_dir = tmp_path / "spark"
     host_dir.mkdir()
     (host_dir / "registry.json").write_text(
-        '{"repos": [{"name": "closed-loop-agent-tuning", "path": "~/dev/closed-loop-agent-tuning"}]}',
+        '{"repos": [{"name": "agent-telemetry-feedback-control", "path": "~/dev/agent-telemetry-feedback-control"}]}',
         encoding="utf-8",
     )
     md = render_fleet_status(store, inbox_dir=tmp_path)
-    assert "closed-loop-agent-tuning" in md
+    assert "agent-telemetry-feedback-control" in md
 
 
 def test_render_includes_registry_real_producer_shape(tmp_path: Path) -> None:
@@ -75,8 +75,8 @@ def test_render_includes_registry_real_producer_shape(tmp_path: Path) -> None:
                 "root": "/home/user/dev",
                 "repos": [
                     {
-                        "name": "closed-loop-agent-tuning",
-                        "path": "/home/user/dev/closed-loop-agent-tuning",
+                        "name": "agent-telemetry-feedback-control",
+                        "path": "/home/user/dev/agent-telemetry-feedback-control",
                         "branch": "main",
                         "dirty": True,
                         "uncommittedChanges": 3,
@@ -93,5 +93,5 @@ def test_render_includes_registry_real_producer_shape(tmp_path: Path) -> None:
         encoding="utf-8",
     )
     md = render_fleet_status(store, inbox_dir=tmp_path)
-    assert "closed-loop-agent-tuning" in md
-    assert "/home/user/dev/closed-loop-agent-tuning" in md
+    assert "agent-telemetry-feedback-control" in md
+    assert "/home/user/dev/agent-telemetry-feedback-control" in md

@@ -1,3 +1,3 @@
-module github.com/Cschaefer732/closed-loop-agent-tuning/go
+module github.com/Cschaefer732/agent-telemetry-feedback-control/go
 
 go 1.22

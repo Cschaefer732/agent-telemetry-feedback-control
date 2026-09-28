@@ -3,6 +3,6 @@ Description=Regression check and auto-revert of last week's tuning changes
 
 [Service]
 Type=oneshot
-WorkingDirectory=%h/dev/closed-loop-agent-tuning
+WorkingDirectory=%h/dev/agent-telemetry-feedback-control
 ExecStart=/usr/bin/env python3 -m flightdeck verify --auto-revert
 TimeoutStartSec=15min

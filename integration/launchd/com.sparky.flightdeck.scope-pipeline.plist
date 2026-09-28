@@ -38,7 +38,7 @@
     <array>
         <string>/bin/bash</string>
         <!-- Replace this with the real absolute path to this repo checkout at install time. -->
-        <string>/Users/YOUR_USERNAME/dev/closed-loop-agent-tuning/integration/launchd/run-scope-pipeline.sh</string>
+        <string>/Users/YOUR_USERNAME/dev/agent-telemetry-feedback-control/integration/launchd/run-scope-pipeline.sh</string>
     </array>
 
     <key>EnvironmentVariables</key>
@@ -58,10 +58,10 @@
     <true/>
 
     <key>StandardOutPath</key>
-    <string>/Users/YOUR_USERNAME/Library/Logs/closed-loop-agent-tuning/scope-pipeline.log</string>
+    <string>/Users/YOUR_USERNAME/Library/Logs/agent-telemetry-feedback-control/scope-pipeline.log</string>
 
     <key>StandardErrorPath</key>
-    <string>/Users/YOUR_USERNAME/Library/Logs/closed-loop-agent-tuning/scope-pipeline.err.log</string>
+    <string>/Users/YOUR_USERNAME/Library/Logs/agent-telemetry-feedback-control/scope-pipeline.err.log</string>
 
     <key>ProcessType</key>
     <string>Background</string>

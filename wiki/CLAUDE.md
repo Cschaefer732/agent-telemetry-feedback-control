@@ -1,4 +1,4 @@
-# Wiki Schema — closed-loop-agent-tuning
+# Wiki Schema — agent-telemetry-feedback-control
 
 This wiki is a compiled knowledge layer for the project. It follows the LLM-wiki pattern:
 raw sources → LLM-compiled pages → queryable index.

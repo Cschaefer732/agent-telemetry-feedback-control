@@ -19,7 +19,7 @@ existing hook keeps working; these are additional entries in the same arrays.
       "hooks": [
         {
           "type": "command",
-          "command": "python3 \"$HOME/dev/closed-loop-agent-tuning/integration/claude-code/turnlog-hook.py\"",
+          "command": "python3 \"$HOME/dev/agent-telemetry-feedback-control/integration/claude-code/turnlog-hook.py\"",
           "timeout": 5
         }
       ]
@@ -30,7 +30,7 @@ existing hook keeps working; these are additional entries in the same arrays.
       "hooks": [
         {
           "type": "command",
-          "command": "python3 \"$HOME/dev/closed-loop-agent-tuning/integration/claude-code/turnlog-hook.py\"",
+          "command": "python3 \"$HOME/dev/agent-telemetry-feedback-control/integration/claude-code/turnlog-hook.py\"",
           "timeout": 5
         }
       ]
@@ -41,7 +41,7 @@ existing hook keeps working; these are additional entries in the same arrays.
       "hooks": [
         {
           "type": "command",
-          "command": "python3 \"$HOME/dev/closed-loop-agent-tuning/integration/claude-code/turnlog-hook.py\"",
+          "command": "python3 \"$HOME/dev/agent-telemetry-feedback-control/integration/claude-code/turnlog-hook.py\"",
           "timeout": 5
         }
       ]
@@ -52,7 +52,7 @@ existing hook keeps working; these are additional entries in the same arrays.
       "hooks": [
         {
           "type": "command",
-          "command": "python3 \"$HOME/dev/closed-loop-agent-tuning/integration/claude-code/turnlog-hook.py\"",
+          "command": "python3 \"$HOME/dev/agent-telemetry-feedback-control/integration/claude-code/turnlog-hook.py\"",
           "timeout": 5
         }
       ]
@@ -63,7 +63,7 @@ existing hook keeps working; these are additional entries in the same arrays.
       "hooks": [
         {
           "type": "command",
-          "command": "python3 \"$HOME/dev/closed-loop-agent-tuning/integration/claude-code/turnlog-hook.py\"",
+          "command": "python3 \"$HOME/dev/agent-telemetry-feedback-control/integration/claude-code/turnlog-hook.py\"",
           "timeout": 10
         }
       ]

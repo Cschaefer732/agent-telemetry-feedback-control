@@ -222,7 +222,7 @@ accumulate the evidence needed to trust it.
 
 ```sh
 git clone <this-repo>
-cd closed-loop-agent-tuning
+cd agent-telemetry-feedback-control
 pip install -e '.[dev]'
 
 python3 -m flightdeck init      # create the local telemetry store

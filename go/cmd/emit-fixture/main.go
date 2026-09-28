@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/Cschaefer732/closed-loop-agent-tuning/go/turnlog"
+	"github.com/Cschaefer732/agent-telemetry-feedback-control/go/turnlog"
 )
 
 func main() {

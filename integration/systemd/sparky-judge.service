@@ -3,6 +3,6 @@ Description=flightdeck 30B judge — drain the flagged-turn backlog
 
 [Service]
 Type=oneshot
-WorkingDirectory=%h/dev/closed-loop-agent-tuning
+WorkingDirectory=%h/dev/agent-telemetry-feedback-control
 Environment=SPARKY_JUDGE_MODEL=qwen3.8:27b
 ExecStart=/usr/bin/env bash -lc 'python3 -m flightdeck judge --limit 20'

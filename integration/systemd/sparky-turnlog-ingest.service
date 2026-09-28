@@ -3,7 +3,7 @@ Description=Ingest turnlog JSONL into turnlog.db (fresh session review data)
 
 [Service]
 Type=oneshot
-WorkingDirectory=%h/dev/closed-loop-agent-tuning
+WorkingDirectory=%h/dev/agent-telemetry-feedback-control
 # Ingest ONLY -- no --expire, no --probe. Those belong to the nightly rollup:
 # --probe writes a probes row per run (every 5 min would flood the table and make
 # the doctor's own history unreadable) and --expire is a retention pass that has

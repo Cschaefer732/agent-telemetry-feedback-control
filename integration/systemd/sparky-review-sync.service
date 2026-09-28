@@ -4,7 +4,7 @@ After=network-online.target
 
 [Service]
 Type=oneshot
-Environment=FLIGHTDECK_DIR=%h/dev/closed-loop-agent-tuning
+Environment=FLIGHTDECK_DIR=%h/dev/agent-telemetry-feedback-control
 ExecStart=%h/.local/bin/sync-turnlogs.sh
 # A partial sync is a finding for the reviewer, not a reason to break the chain.
 SuccessExitStatus=0

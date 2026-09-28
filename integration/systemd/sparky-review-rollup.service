@@ -3,7 +3,7 @@ Description=Roll up turnlogs, score turns, run probes, render fleet-status.md
 
 [Service]
 Type=oneshot
-WorkingDirectory=%h/dev/closed-loop-agent-tuning
+WorkingDirectory=%h/dev/agent-telemetry-feedback-control
 # fleet-status runs here rather than its own timer: it only needs what sync (01:40) already
 # pulled, and rollup is the next scheduled stage (01:50) — no new independent timer.
 ExecStart=/usr/bin/env bash -lc 'python3 -m flightdeck rollup --expire --probe && python3 -m flightdeck fleet-status'

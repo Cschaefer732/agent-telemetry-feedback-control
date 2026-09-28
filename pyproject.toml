@@ -1,5 +1,5 @@
 [project]
-name = "closed-loop-agent-tuning"
+name = "agent-telemetry-feedback-control"
 version = "0.1.0"
 description = "Closed-loop telemetry, KPI scoring, a selector governor, and judge-guarded nightly self-tuning for LLM coding agent fleets"
 readme = "README.md"
